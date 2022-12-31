@@ -1,11 +1,10 @@
-import 'package:connect_app/app/integrations/controller.dart';
+// ignore_for_file: must_be_immutable, use_key_in_widget_constructors
+
 import 'package:connect_app/app/routes/app_pages.dart';
 import 'package:connect_app/app/utils/colors.dart';
 import 'package:connect_app/app/utils/widgets.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
-import 'package:nb_utils/nb_utils.dart';
 
 class BottomNav extends StatelessWidget {
   bool isHome;

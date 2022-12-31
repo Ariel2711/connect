@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_final_fields, avoid_print
+
 import 'package:connect_app/app/data/models/user_model.dart';
 import 'package:connect_app/app/integrations/firestore.dart';
 import 'package:connect_app/app/routes/app_pages.dart';
@@ -92,8 +94,7 @@ class AuthController extends GetxController {
         avatar: "",
         role: role,
       );
-
-      final myuser = await _auth
+      await _auth
           .createUserWithEmailAndPassword(
         email: emailC.text,
         password: passwordC.text,
@@ -206,7 +207,6 @@ class AuthController extends GetxController {
     } else {
       print("null auth");
       user = UserModel();
-      ;
     }
   }
 
@@ -219,6 +219,7 @@ class AuthController extends GetxController {
   }
 
   @override
+  // ignore: unnecessary_overrides
   void onReady() {
     super.onReady();
   }

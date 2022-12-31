@@ -1,3 +1,5 @@
+// ignore_for_file: body_might_complete_normally_nullable
+
 import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -88,7 +90,6 @@ class Database {
 
   Future<String?> upload({required String id, required File file}) async {
     try {
-      String? url;
       var task = await storageReference.child(id).putFile(file);
       if (task.state == TaskState.success) {
         return await storageReference.child(id).getDownloadURL();

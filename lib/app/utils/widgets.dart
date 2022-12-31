@@ -1,14 +1,9 @@
-// ignore_for_file: unnecessary_null_in_if_null_operators
-
-import 'dart:io';
+// ignore_for_file: unnecessary_null_in_if_null_operators, prefer_typing_uninitialized_variables, must_be_immutable, use_key_in_widget_constructors
 import 'package:connect_app/app/utils/colors.dart';
 import 'package:connect_app/app/utils/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:get/get.dart';
 import 'package:nb_utils/nb_utils.dart';
-import 'package:image_picker/image_picker.dart';
-import '../../main.dart';
 
 Widget text(
   String? text, {
@@ -249,7 +244,7 @@ class EditTextState extends State<EditText> {
                   widget.isPassword = !widget.isPassword;
                 });
               },
-              child: new Icon(
+              child: Icon(
                 widget.isPassword ? Icons.visibility : Icons.visibility_off,
                 color: colorPrimary,
               ),

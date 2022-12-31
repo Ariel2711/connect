@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, sized_box_for_whitespace
+// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, sized_box_for_whitespace, must_be_immutable
 import 'package:connect_app/app/routes/app_pages.dart';
 import 'package:connect_app/app/utils/colors.dart';
 import 'package:connect_app/app/utils/images.dart';
@@ -10,6 +10,7 @@ import '../controllers/auth_controller.dart';
 
 class AuthView extends GetView<AuthController> {
   GlobalKey<FormState> form = GlobalKey();
+  AuthView({super.key});
   @override
   Widget build(BuildContext context) {
     return Scaffold(
