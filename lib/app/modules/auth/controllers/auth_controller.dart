@@ -13,7 +13,7 @@ class AuthController extends GetxController {
   FirebaseAuth _auth = FirebaseAuth.instance;
   Stream<User?> streamAuth() => _auth.authStateChanges();
 
-  var role = "User";
+  var role = "user";
 
   var currUser = UserModel().obs;
   UserModel get user => currUser.value;
@@ -58,29 +58,15 @@ class AuthController extends GetxController {
             middleTextStyle: TextStyle(color: colorPrimary));
       }
     } on FirebaseAuthException catch (e) {
-      toast(e.toString());
-      // Get.defaultDialog(
-      //     title: "Error",
-      //     middleText: e.toString(),
-      //     textConfirm: "Oke",
-      //     onConfirm: () => Get.back(),
-      //     buttonColor: colorPrimary,
-      //     cancelTextColor: colorPrimary,
-      //     confirmTextColor: colorWhite,
-      //     titleStyle: TextStyle(color: colorPrimary),
-      //     middleTextStyle: TextStyle(color: colorPrimary));
+      if (e.code == 'user-not-found') {
+        toast('Tidak ada user untuk email ini');
+      } else if (e.code == 'wrong-password') {
+        toast('Password salah untuk email ini');
+      } else {
+        toast(e.toString());
+      }
     } catch (e) {
       toast(e.toString());
-      // Get.defaultDialog(
-      // title: "Error",
-      // middleText: e.toString(),
-      // textConfirm: "Oke",
-      // onConfirm: () => Get.back(),
-      // buttonColor: colorPrimary,
-      // cancelTextColor: colorPrimary,
-      // confirmTextColor: colorWhite,
-      // titleStyle: TextStyle(color: colorPrimary),
-      // middleTextStyle: TextStyle(color: colorPrimary));
     }
   }
 
@@ -94,58 +80,47 @@ class AuthController extends GetxController {
         avatar: "",
         role: role,
       );
-      await _auth
-          .createUserWithEmailAndPassword(
+      UserCredential myUser = await _auth.createUserWithEmailAndPassword(
         email: emailC.text,
         password: passwordC.text,
-      )
-          .then((value) async {
-        await value.user!.sendEmailVerification();
-        user.id = value.user?.uid;
-        if (user.id != null) {
-          firebaseFirestore
-              .collection(usersCollection)
-              .doc(user.id)
-              .set(user.toJson)
-              .then((value) {
-            Get.defaultDialog(
-                title: "Verifikasi Email",
-                middleText: "Kami telah mengirimkan verifikasi ke Email anda",
-                textConfirm: "Oke",
-                onConfirm: () {
-                  // Get.toNamed(Routes.HOME);
-                  nameC.clear();
-                  passwordC.clear();
-                  emailC.clear();
-                  passwordC2.clear();
-                  Get.back();
-                },
-                buttonColor: colorPrimary,
-                cancelTextColor: colorPrimary,
-                confirmTextColor: colorWhite,
-                titleStyle: TextStyle(color: colorPrimary),
-                middleTextStyle: TextStyle(color: colorPrimary));
-          });
-        }
-      });
+      );
+      await myUser.user!.sendEmailVerification();
+      user.id = myUser.user!.uid;
+      if (user.id != null) {
+        firebaseFirestore
+            .collection(usersCollection)
+            .doc(user.id)
+            .set(user.toJson)
+            .then((value) {
+          Get.defaultDialog(
+              title: "Verifikasi Email",
+              middleText: "Kami telah mengirimkan verifikasi ke Email anda",
+              textConfirm: "Oke",
+              onConfirm: () {
+                nameC.clear();
+                passwordC.clear();
+                emailC.clear();
+                passwordC2.clear();
+                Get.back();
+                isRegis = false;
+              },
+              buttonColor: colorPrimary,
+              cancelTextColor: colorPrimary,
+              confirmTextColor: colorWhite,
+              titleStyle: TextStyle(color: colorPrimary),
+              middleTextStyle: TextStyle(color: colorPrimary));
+        });
+      }
       isSaving = false;
     } on FirebaseAuthException catch (e) {
       isSaving = false;
-      toast(e.toString());
-      // Get.defaultDialog(
-      //     title: "Error",
-      //     textConfirm: "Oke",
-      //     onConfirm: () {
-      //       Get.back();
-      //       nameC.clear();
-      //       passwordC.clear();
-      //       emailC.clear();
-      //     },
-      //     buttonColor: colorPrimary,
-      //     cancelTextColor: colorPrimary,
-      //     confirmTextColor: colorWhite,
-      //     titleStyle: TextStyle(color: colorPrimary),
-      //     middleTextStyle: TextStyle(color: colorPrimary));
+      if (e.code == 'weak-password') {
+        toast('Password terlalu lemah');
+      } else if (e.code == 'email-already-in-use') {
+        toast('Akun sudah ada untuk email ini');
+      } else {
+        toast(e.toString());
+      }
     }
   }
 

@@ -18,30 +18,8 @@ class Database {
       return doc.id;
     } on FirebaseException catch (e) {
       toast(e.toString());
-      // Get.defaultDialog(
-      //   title: "Error",
-      //   middleText: "Gagal Menambahkan",
-      //   onConfirm: () => Get.back(),
-      //   textConfirm: "Oke",
-      //   buttonColor: primary,
-      //   cancelTextColor: primary,
-      //   confirmTextColor: white,
-      //   titleStyle: TextStyle(color: primary),
-      //   middleTextStyle: TextStyle(color: primary)
-      // );
     } catch (e) {
       toast(e.toString());
-      // Get.defaultDialog(
-      //   title: "Error",
-      //   middleText: e.toString(),
-      //   onConfirm: () => Get.back(),
-      //   textConfirm: "Oke",
-      //   buttonColor: primary,
-      //   cancelTextColor: primary,
-      //   confirmTextColor: white,
-      //   titleStyle: TextStyle(color: primary),
-      //   middleTextStyle: TextStyle(color: primary)
-      // );
     }
   }
 
@@ -50,17 +28,6 @@ class Database {
       return await collectionReference.doc(json["id"]).update(json);
     } on FirebaseException catch (e) {
       toast(e.toString());
-      // Get.defaultDialog(
-      //   title: "Error",
-      //   middleText: e.toString(),
-      //   onConfirm: () => Get.back(),
-      //   textConfirm: "Oke",
-      //   buttonColor: primary,
-      //   cancelTextColor: primary,
-      //   confirmTextColor: white,
-      //   titleStyle: TextStyle(color: primary),
-      //   middleTextStyle: TextStyle(color: primary)
-      // );
       rethrow;
     }
   }
@@ -73,17 +40,6 @@ class Database {
       return await collectionReference.doc(id).delete();
     } on FirebaseException catch (e) {
       toast(e.toString());
-      // Get.defaultDialog(
-      //   title: "Error",
-      //   middleText: e.toString(),
-      //   onConfirm: () => Get.back(),
-      //   textConfirm: "Oke",
-      //   buttonColor: primary,
-      //   cancelTextColor: primary,
-      //   confirmTextColor: white,
-      //   titleStyle: TextStyle(color: primary),
-      //   middleTextStyle: TextStyle(color: primary)
-      // );
       rethrow;
     }
   }
@@ -95,44 +51,11 @@ class Database {
         return await storageReference.child(id).getDownloadURL();
       }
       toast("Gagal Upload Gambar");
-      // Get.defaultDialog(
-      //   title: "Error",
-      //   middleText: "Gagal Upload Gambar",
-      //   onConfirm: () => Get.back(),
-      //   textConfirm: "Oke",
-      //   buttonColor: primary,
-      //   cancelTextColor: primary,
-      //   confirmTextColor: white,
-      //   titleStyle: TextStyle(color: primary),
-      //   middleTextStyle: TextStyle(color: primary)
-      // );
     } on FirebaseException catch (e) {
       toast(e.toString());
-      // Get.defaultDialog(
-      //   title: "Error",
-      //   middleText: e.toString(),
-      //   onConfirm: () => Get.back(),
-      //   textConfirm: "Oke",
-      //   buttonColor: primary,
-      //   cancelTextColor: primary,
-      //   confirmTextColor: white,
-      //   titleStyle: TextStyle(color: primary),
-      //   middleTextStyle: TextStyle(color: primary)
-      // );
       rethrow;
     } catch (e) {
       toast(e.toString());
-      // Get.defaultDialog(
-      //   title: "Error",
-      //   middleText: e.toString(),
-      //   onConfirm: () => Get.back(),
-      //   textConfirm: "Oke",
-      //   buttonColor: primary,
-      //   cancelTextColor: primary,
-      //   confirmTextColor: white,
-      //   titleStyle: TextStyle(color: primary),
-      //   middleTextStyle: TextStyle(color: primary)
-      // );
       rethrow;
     }
   }

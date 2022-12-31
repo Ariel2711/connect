@@ -1,3 +1,4 @@
+// ignore_for_file: prefer_const_literals_to_create_immutables
 import 'package:connect_app/app/integrations/binding.dart';
 import 'package:connect_app/app/modules/auth/controllers/auth_controller.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -5,6 +6,7 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'app/routes/app_pages.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 
 void main() async {
   InitBinding();
@@ -33,18 +35,20 @@ class MyApp extends StatelessWidget {
     //   },
     // );
     return GetMaterialApp(
-      // theme: ThemeData(
-      //   appBarTheme: AppBarTheme(
-      //     backgroundColor: primary,
-      //     elevation: 0,
-      //   ),
-      //   bottomAppBarColor: primary,
-      //   floatingActionButtonTheme:
-      //       FloatingActionButtonThemeData(backgroundColor: primary),
-      // ),
+      theme: ThemeData(fontFamily: 'Nunito'),
+      localizationsDelegates: [
+        // AppLocalizations.delegate, // Add this line
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+      ],
+      supportedLocales: [
+        Locale('en', ''), // English, no country code
+        Locale('id', ''), // Indonesian, no country code
+      ],
       debugShowCheckedModeBanner: false,
       title: "CONNECT",
-      initialRoute: Routes.AUTH,
+      initialRoute: Routes.HOME,
       getPages: AppPages.routes,
     );
   }

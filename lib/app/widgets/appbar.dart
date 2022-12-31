@@ -1,23 +1,33 @@
+// ignore_for_file: prefer_const_literals_to_create_immutables
+
 import 'package:connect_app/app/utils/colors.dart';
 import 'package:connect_app/app/utils/constants.dart';
+import 'package:connect_app/app/utils/images.dart';
 import 'package:connect_app/app/utils/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:nb_utils/nb_utils.dart';
 
-PreferredSizeWidget appbarWidget({
+PreferredSizeWidget widgetAppbar({
   required String title,
-  required bool showDrawer,
-  bool isWithLogo = false,
+  bool showDrawer = true,
+  bool isWithLogo = true,
+  bool showBack = true,
+  bool isConnectLogo = true,
+  bool isCenter = true,
   bool isBordered = true,
   PreferredSizeWidget? bottom,
   List<Widget>? actions,
 }) {
   return AppBar(
+    automaticallyImplyLeading: false,
     iconTheme: IconThemeData(color: colorBlack),
-    leading: BackButton(
-      color: colorWhite,
-    ),
+    leadingWidth: Get.width / 2,
+    leading: showBack
+        ? BackButton(
+            color: colorWhite,
+          )
+        : null,
     backgroundColor: colorPrimary,
     actions: showDrawer ? [] : actions ?? [56.width],
     elevation: 0,
@@ -29,15 +39,33 @@ PreferredSizeWidget appbarWidget({
                 bottom: BorderSide(color: textColorGrey),
               )
             : null,
-        // gradient: LinearGradient(
-        //   colors: [mkScaffoldColor, mkColorPrimary],
-        //   begin: Alignment(0.5, 1),
-        //   end: Alignment(0.6, -1),
-        // ),
+        gradient: LinearGradient(
+          colors: [colorSecondary, colorPrimary],
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+        ),
       ),
     ),
-    centerTitle: true,
+    centerTitle: isCenter,
     bottom: bottom,
-    title: text(title, fontSize: textSizeMedium, textColor: colorWhite),
+    title: isWithLogo
+        ? Row(
+            children: [
+              3.width,
+              isConnectLogo
+                  ? Image.asset(
+                      connectputih,
+                      height: 50,
+                    )
+                  : Icon(
+                      Icons.account_circle,
+                      color: colorWhite,
+                      size: 40,
+                    ),
+              10.width,
+              text(title, fontSize: textSizeMedium, textColor: colorWhite),
+            ],
+          )
+        : text(title, fontSize: textSizeLargeMedium, textColor: colorWhite),
   );
 }

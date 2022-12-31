@@ -24,15 +24,14 @@ class UserModel {
       {this.id, this.nama, this.email, this.password, this.avatar, this.role});
 
   UserModel fromJson(DocumentSnapshot doc) {
-    print("doc data = ${doc.data()}");
-    Map<String, dynamic> json = doc.data() as Map<String, dynamic>;
+    var json = doc.data() as Map<String, dynamic>?;
     return UserModel(
         id: doc.id,
-        nama: json[unama],
-        email: json[uemail],
-        password: json[password],
-        avatar: json[avatar],
-        role: json[role]);
+        nama: json?[unama],
+        email: json?[uemail],
+        password: json?[password],
+        avatar: json?[avatar],
+        role: json?[role]);
   }
 
   Map<String, dynamic> get toJson => {
@@ -60,7 +59,6 @@ class UserModel {
   }
 
   Stream<UserModel> streamList(String id) async* {
-    print("getStream");
     yield* db.collectionReference.doc(id).snapshots().map((event) {
       print("event id = ${event.id}");
       return fromJson(event);

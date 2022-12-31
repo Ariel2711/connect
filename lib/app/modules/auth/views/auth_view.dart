@@ -1,6 +1,7 @@
-// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, sized_box_for_whitespace, must_be_immutable
+// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, sized_box_for_whitespace, must_be_immutable, unrelated_type_equality_checks, avoid_print
 import 'package:connect_app/app/routes/app_pages.dart';
 import 'package:connect_app/app/utils/colors.dart';
+import 'package:connect_app/app/utils/constants.dart';
 import 'package:connect_app/app/utils/images.dart';
 import 'package:connect_app/app/utils/widgets.dart';
 import 'package:flutter/material.dart';
@@ -72,6 +73,12 @@ class AuthView extends GetView<AuthController> {
                               borderRadius: BorderRadius.circular(15),
                             ),
                           ),
+                          validator: (value) {
+                            if (value!.isEmpty) {
+                              return 'Harap isi nama Anda';
+                            }
+                            return null;
+                          },
                         ),
                       if (controller.isRegis) 25.height,
                       AppTextField(
@@ -103,10 +110,16 @@ class AuthView extends GetView<AuthController> {
                           ),
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(
-                              10,
+                              15,
                             ),
                           ),
                         ),
+                        validator: (value) {
+                          if (value!.isEmpty) {
+                            return 'Harap isi email Anda';
+                          }
+                          return null;
+                        },
                       ),
                       25.height,
                       AppTextField(
@@ -138,6 +151,12 @@ class AuthView extends GetView<AuthController> {
                             borderRadius: BorderRadius.circular(15),
                           ),
                         ),
+                        validator: (value) {
+                          if (value!.isEmpty) {
+                            return 'Harap isi password Anda';
+                          }
+                          return null;
+                        },
                       ),
                       if (controller.isRegis) 25.height,
                       if (controller.isRegis)
@@ -170,27 +189,35 @@ class AuthView extends GetView<AuthController> {
                               borderRadius: BorderRadius.circular(15),
                             ),
                           ),
+                          validator: (value) {
+                            if (value!.isEmpty) {
+                              return 'Harap konfirmasi password Anda';
+                            }
+                            return null;
+                          },
                         ),
-                      10.height,
+                      15.height,
                       Align(
-                        alignment: Alignment.centerRight,
-                        child: TextButton(
-                            child: Text("Lupa Password?",
-                                style: TextStyle(color: colorPrimary)),
-                            onPressed: () {
-                              // Get.toNamed(Routes.RESET);
-                            }),
-                      ),
-                      10.height,
+                          alignment: Alignment.centerRight,
+                          child: GestureDetector(
+                            child: text("Lupa Password?",
+                                textColor: colorPrimary,
+                                fontSize: textSizeMedium),
+                          )),
+                      15.height,
                       Obx(
                         () => InkWell(
                           onTap: controller.isSaving
                               ? null
                               : () async {
                                   if (form.currentState!.validate()) {
+                                    print("submit");
                                     controller.isSaving = true;
                                     controller.isRegis
-                                        ? await controller.register()
+                                        ? controller.passwordC.text ==
+                                                controller.passwordC2.text
+                                            ? await controller.register()
+                                            : toast("Password tidak cocok")
                                         : await controller.login();
                                     controller.isSaving = false;
                                   }
@@ -243,38 +270,37 @@ class AuthView extends GetView<AuthController> {
                           ),
                         ),
                       ),
-                      10.height,
-                      TextButton(
-                        onPressed: () {
+                      15.height,
+                      GestureDetector(
+                        child: text(
+                            controller.isRegis
+                                ? "Sudah Punya Akun? Login Disini!"
+                                : "Belum Punya Akun? Daftar Disini!",
+                            textColor: colorPrimary,
+                            fontSize: textSizeMedium),
+                        onTap: () {
                           controller.isRegis = !controller.isRegis;
                           controller.nameC.clear();
                           controller.passwordC.clear();
                           controller.passwordC2.clear();
                           controller.emailC.clear();
                         },
-                        style:
-                            ButtonStyle(visualDensity: VisualDensity.compact),
-                        child: Text(
-                            controller.isRegis
-                                ? "Sudah Punya Akun? Login Disini!"
-                                : "Belum Punya Akun? Daftar Disini!",
-                            style: TextStyle(color: colorPrimary)),
                       ),
-                      TextButton(
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Icon(
-                              Icons.account_circle,
-                              color: colorPrimary,
-                            ),
-                            10.width,
-                            Text("Masuk sebagai guest",
-                                style: TextStyle(color: colorPrimary)),
-                          ],
-                        ),
-                        onPressed: () => Get.offAndToNamed(Routes.HOME),
-                      ),
+                      15.height,
+                      GestureDetector(
+                          child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Icon(
+                                  Icons.account_circle,
+                                  color: colorPrimary,
+                                ),
+                                10.width,
+                                text("Masuk sebagai guest",
+                                    textColor: colorPrimary,
+                                    fontSize: textSizeMedium)
+                              ]),
+                          onTap: () => Get.offAndToNamed(Routes.HOME)),
                     ]),
                   ]),
                 ),
