@@ -13,7 +13,6 @@ class AuthView extends GetView<AuthController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: colorScaffold,
       body: Container(
         height: double.infinity,
         decoration: BoxDecoration(
