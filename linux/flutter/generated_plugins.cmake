@@ -4,6 +4,8 @@
 
 list(APPEND FLUTTER_PLUGIN_LIST
   nb_utils
+  pasteboard
+  url_launcher_linux
 )
 
 list(APPEND FLUTTER_FFI_PLUGIN_LIST

@@ -8,19 +8,20 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:nb_utils/nb_utils.dart';
 
-PreferredSizeWidget widgetAppbar({
+PreferredSizeWidget appBarWidget({
   required String title,
-  bool showDrawer = true,
-  bool isWithLogo = true,
-  bool showBack = true,
-  bool isConnectLogo = true,
-  bool isCenter = true,
-  bool isBordered = true,
+  bool showDrawer = false,
+  bool isWithLogo = false,
+  bool showBack = false,
+  bool isConnectLogo = false,
+  bool isCenter = false,
+  bool isBordered = false,
+  bool implyLeading = false,
   PreferredSizeWidget? bottom,
   List<Widget>? actions,
 }) {
   return AppBar(
-    automaticallyImplyLeading: false,
+    automaticallyImplyLeading: implyLeading,
     iconTheme: IconThemeData(color: colorBlack),
     leadingWidth: Get.width / 2,
     leading: showBack

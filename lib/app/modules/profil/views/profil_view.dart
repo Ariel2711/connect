@@ -13,14 +13,10 @@ class ProfilView extends GetView<ProfilController> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: colorScaffold,
-      appBar: widgetAppbar(
-          title: "Profil User",
-          isWithLogo: true,
-          isConnectLogo: false,
-          isBordered: false,
-          showBack: false,
-          showDrawer: false,
-          isCenter: false),
+      appBar: appBarWidget(
+        title: "Profil User",
+        isWithLogo: true,
+      ),
       body: Center(
         child: Text(
           'ProfilView is working',

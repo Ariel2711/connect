@@ -8,10 +8,16 @@
 
 #include <connectivity_plus/connectivity_plus_windows_plugin.h>
 #include <nb_utils/nb_utils_plugin.h>
+#include <pasteboard/pasteboard_plugin.h>
+#include <url_launcher_windows/url_launcher_windows.h>
 
 void RegisterPlugins(flutter::PluginRegistry* registry) {
   ConnectivityPlusWindowsPluginRegisterWithRegistrar(
       registry->GetRegistrarForPlugin("ConnectivityPlusWindowsPlugin"));
   NbUtilsPluginRegisterWithRegistrar(
       registry->GetRegistrarForPlugin("NbUtilsPlugin"));
+  PasteboardPluginRegisterWithRegistrar(
+      registry->GetRegistrarForPlugin("PasteboardPlugin"));
+  UrlLauncherWindowsRegisterWithRegistrar(
+      registry->GetRegistrarForPlugin("UrlLauncherWindows"));
 }

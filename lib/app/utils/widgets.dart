@@ -1,6 +1,8 @@
 // ignore_for_file: unnecessary_null_in_if_null_operators, prefer_typing_uninitialized_variables, must_be_immutable, use_key_in_widget_constructors
 import 'package:connect_app/app/utils/colors.dart';
 import 'package:connect_app/app/utils/constants.dart';
+import 'package:connect_app/app/utils/images.dart';
+import 'package:connect_app/app/utils/shimmer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:nb_utils/nb_utils.dart';
@@ -39,6 +41,39 @@ Widget text(
   );
 }
 
+inputText(
+    {TextFieldType textFieldType = TextFieldType.NAME,
+    TextEditingController? controller,
+    bool? isValidationRequired,
+    bool? isEnabled,
+    bool? isReadOnly,
+    Icon? icon,
+    String? label,
+    String? initValue,
+    String? hint,
+    Widget? suffix,
+    Color? suffixColor,
+    Function(String)? onFieldSubmitted,
+    String? Function(String?)? validator}) {
+  return AppTextField(
+    controller: controller,
+    isValidationRequired: isValidationRequired,
+    textFieldType: textFieldType,
+    onFieldSubmitted: onFieldSubmitted,
+    decoration: InputDecoration(
+      prefixIcon: icon,
+      labelText: label,
+      suffixIcon: suffix,
+      hintText: hint,
+      suffixIconColor: suffixColor,
+    ),
+    enabled: isEnabled,
+    readOnly: isReadOnly,
+    validator: validator,
+    initialValue: initValue,
+  );
+}
+
 BoxDecoration boxDecoration(
     {double radius = 2,
     Color color = Colors.transparent,
@@ -63,46 +98,46 @@ BoxDecoration boxDecoration(
   );
 }
 
-Widget appBarTitleWidget(context, String title,
-    {Color? color, Color? textColor}) {
-  return Container(
-    width: MediaQuery.of(context).size.width,
-    height: 60,
-    color: color ?? colorLight,
-    child: Row(
-      children: <Widget>[
-        Text(
-          title,
-          style: boldTextStyle(color: color ?? textPrimaryColor, size: 20),
-          maxLines: 1,
-        ).expand(),
-      ],
-    ),
-  );
-}
+// Widget appBarTitleWidget(context, String title,
+//     {Color? color, Color? textColor}) {
+//   return Container(
+//     width: MediaQuery.of(context).size.width,
+//     height: 60,
+//     color: color ?? colorLight,
+//     child: Row(
+//       children: <Widget>[
+//         Text(
+//           title,
+//           style: boldTextStyle(color: color ?? textPrimaryColor, size: 20),
+//           maxLines: 1,
+//         ).expand(),
+//       ],
+//     ),
+//   );
+// }
 
-AppBar appBar(BuildContext context, String title,
-    {List<Widget>? actions,
-    bool showBack = true,
-    Color? color,
-    Color? iconColor,
-    Color? textColor}) {
-  return AppBar(
-    automaticallyImplyLeading: false,
-    backgroundColor: color ?? colorLight,
-    leading: showBack
-        ? IconButton(
-            onPressed: () {
-              finish(context);
-            },
-            icon: Icon(Icons.arrow_back, color: black),
-          )
-        : null,
-    title:
-        appBarTitleWidget(context, title, textColor: textColor, color: color),
-    actions: actions,
-  );
-}
+// AppBar appBar(BuildContext context, String title,
+//     {List<Widget>? actions,
+//     bool showBack = true,
+//     Color? color,
+//     Color? iconColor,
+//     Color? textColor}) {
+//   return AppBar(
+//     automaticallyImplyLeading: false,
+//     backgroundColor: color ?? colorLight,
+//     leading: showBack
+//         ? IconButton(
+//             onPressed: () {
+//               finish(context);
+//             },
+//             icon: Icon(Icons.arrow_back, color: black),
+//           )
+//         : null,
+//     title:
+//         appBarTitleWidget(context, title, textColor: textColor, color: color),
+//     actions: actions,
+//   );
+// }
 
 Widget boxContainer(
         {required List<Widget> widgets,
@@ -357,3 +392,11 @@ class TopBarState extends State<TopBar> {
     );
   }
 }
+
+Widget? Function(BuildContext, String) placeholderWidgetFn() =>
+    (_, s) => placeholderWidget();
+
+Widget placeholderWidget() => Shimmer.fromColors(
+    baseColor: Colors.grey[400],
+    highlightColor: Colors.grey[100],
+    child: Image.asset(image_grey, fit: BoxFit.cover));

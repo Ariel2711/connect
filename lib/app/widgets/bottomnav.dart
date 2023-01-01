@@ -12,7 +12,7 @@ class BottomNav extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ConvexAppBar(
-      backgroundColor: colorLight,
+      backgroundColor: colorScaffold,
       style: TabStyle.reactCircle,
       color: colorPrimary,
       activeColor: colorPrimary,

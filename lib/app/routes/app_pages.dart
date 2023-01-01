@@ -4,6 +4,8 @@ import '../modules/auth/bindings/auth_binding.dart';
 import '../modules/auth/views/auth_view.dart';
 import '../modules/home/bindings/home_binding.dart';
 import '../modules/home/views/home_view.dart';
+import '../modules/input/bindings/input_binding.dart';
+import '../modules/input/views/input_view.dart';
 import '../modules/profil/bindings/profil_binding.dart';
 import '../modules/profil/views/profil_view.dart';
 import '../modules/search/bindings/search_binding.dart';
@@ -37,6 +39,11 @@ class AppPages {
       name: _Paths.PROFIL,
       page: () => const ProfilView(),
       binding: ProfilBinding(),
+    ),
+    GetPage(
+      name: _Paths.INPUT,
+      page: () => InputBeritaView(),
+      binding: InputBinding(),
     ),
   ];
 }
