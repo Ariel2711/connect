@@ -22,15 +22,19 @@ class HomeView extends GetView<HomeController> {
     print(controller.listberita.length);
     return Scaffold(
       backgroundColor: colorScaffold,
-      appBar: appBarWidget(title: "CONNECT", isWithLogo: true, actions: [
-        Align(
-            alignment: Alignment.centerRight,
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 12),
-              child: text(dateFormatter(DateTime.now()),
-                  fontSize: textSizeSMedium, textColor: colorWhite),
-            ))
-      ]),
+      appBar: appBarWidget(
+          title: "CONNECT",
+          isWithLogo: true,
+          isConnectLogo: true,
+          actions: [
+            Align(
+                alignment: Alignment.centerRight,
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 12),
+                  child: text(dateFormatter(DateTime.now()),
+                      fontSize: textSizeSMedium, textColor: colorWhite),
+                ))
+          ]),
       body: Obx(
         () => SingleChildScrollView(
           child: Column(children: [

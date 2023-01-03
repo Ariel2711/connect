@@ -57,7 +57,7 @@ class BeritaSlider extends GetView<HomeController> {
                             mainAxisSize: MainAxisSize.min,
                             children: <Widget>[
                               text(
-                                "Messi dan Argentina Juara Piala Dunia",
+                                berita.judul,
                                 maxLine: 2,
                                 fontSize: textSizeMedium,
                                 textColor: textColorPrimary,
