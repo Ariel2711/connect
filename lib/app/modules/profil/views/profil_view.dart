@@ -13,7 +13,7 @@ class ProfilView extends GetView<ProfilController> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: colorScaffold,
-      appBar: appBarWidget(
+      appBar: appBarLocal(
         title: "Profil User",
         isWithLogo: true,
       ),

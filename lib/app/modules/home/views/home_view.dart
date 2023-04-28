@@ -22,7 +22,7 @@ class HomeView extends GetView<HomeController> {
     print(controller.listberita.length);
     return Scaffold(
       backgroundColor: colorScaffold,
-      appBar: appBarWidget(
+      appBar: appBarLocal(
           title: "CONNECT",
           isWithLogo: true,
           isConnectLogo: true,

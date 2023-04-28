@@ -22,7 +22,7 @@ class InputBeritaView extends GetView<InputBeritaController> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-          appBar: appBarWidget(
+          appBar: appBarLocal(
               title: berita.id.isEmptyOrNull ? "Tambah Berita" : "Edit Berita",
               showBack: true),
           body: StepperBody()),

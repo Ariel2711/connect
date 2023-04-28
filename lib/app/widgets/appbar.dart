@@ -8,7 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:nb_utils/nb_utils.dart';
 
-PreferredSizeWidget appBarWidget({
+PreferredSizeWidget appBarLocal({
   required String title,
   bool showDrawer = false,
   bool isWithLogo = false,
