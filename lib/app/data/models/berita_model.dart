@@ -4,15 +4,6 @@ import 'package:connect_app/app/data/database.dart';
 import 'package:connect_app/app/integrations/firestore.dart';
 import 'package:nb_utils/nb_utils.dart';
 
-const String bid = "id";
-const String bjudul = "judul";
-const String bisi = "isi";
-const String bimage = "image";
-const String bkategori = "kategori";
-const String bwaktu = "waktu";
-const String blike = "like";
-const String btags = "tags";
-
 class BeritaModel {
   String? id;
   String? judul;
@@ -20,7 +11,7 @@ class BeritaModel {
   String? image;
   String? kategori;
   int? like;
-  DateTime? waktu;
+  DateTime? tanggal;
   List<String>? tags;
 
   BeritaModel({
@@ -28,7 +19,7 @@ class BeritaModel {
     this.judul,
     this.isi,
     this.image,
-    this.waktu,
+    this.tanggal,
     this.kategori,
     this.like,
     this.tags,
@@ -41,31 +32,31 @@ class BeritaModel {
   //     judul: json[bjudul],
   //     isi: json[bisi],
   //     image: json[bimage],
-  //     waktu: (json[bwaktu] as Timestamp?)?.toDate(),
+  //     tanggal: (json[btanggal] as Timestamp?)?.toDate(),
   //   );
   // }
 
   BeritaModel.fromJson(DocumentSnapshot doc) {
     Map<String, dynamic>? json = doc.data() as Map<String, dynamic>;
     id = doc.id;
-    judul = json[bjudul];
-    isi = json[bisi];
-    image = json[bimage];
-    waktu = (json[bwaktu] as Timestamp?)?.toDate();
-    kategori = json[bkategori];
-    like = json[blike];
-    tags = (json[btags] as List<dynamic>?)?.map((e) => e.toString()).toList();
+    judul = json['judul'];
+    isi = json['isi'];
+    image = json['image'];
+    tanggal = (json['tanggal'] as Timestamp?)?.toDate();
+    kategori = json['kategori'];
+    like = json['like'];
+    tags = (json['tags'] as List<dynamic>?)?.map((e) => e.toString()).toList();
   }
 
   Map<String, dynamic> get toJson => {
-        bid: id,
-        bjudul: judul,
-        bisi: isi,
-        bimage: image,
-        bwaktu: waktu,
-        bkategori: kategori,
-        blike: like,
-        btags: tags,
+        'id': id,
+        'judul': judul,
+        'isi': isi,
+        'image': image,
+        'tanggal': tanggal,
+        'kategori': kategori,
+        'like': like,
+        'tags': tags,
       };
 
   Database db = Database(
@@ -88,7 +79,7 @@ class BeritaModel {
   }
 
   Stream<List<BeritaModel>> streamList({int? limit}) async* {
-    var query = db.collectionReference.orderBy("waktu", descending: true);
+    var query = db.collectionReference.orderBy("tanggal", descending: true);
     if (limit is int) {
       query = query.limit(limit);
     }

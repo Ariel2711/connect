@@ -76,7 +76,7 @@ class AuthController extends GetxController {
       UserModel user = UserModel(
         nama: nameC.text,
         email: emailC.text,
-        password: passwordC.text,
+        tanggal: DateTime.now(),
         avatar: "",
         role: role,
       );

@@ -28,7 +28,7 @@ class InputBeritaController extends GetxController {
     berita.isi = jsonEncode(quillControllerisi.document.toDelta().toJson());
     berita.judul = judulberitaC.text;
     if (berita.id == null) {
-      berita.waktu = DateTime.now();
+      berita.tanggal = DateTime.now();
     }
     berita.tags = tags.value;
     berita.kategori = selectedKategori;

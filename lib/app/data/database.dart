@@ -15,6 +15,8 @@ class Database {
   Future<String?> add(Map<String, dynamic> json) async {
     try {
       DocumentReference doc = await collectionReference.add(json);
+      json["id"] = doc.id;
+      await collectionReference.doc(json["id"]).update(json);
       return doc.id;
     } on FirebaseException catch (e) {
       toast(e.toString());

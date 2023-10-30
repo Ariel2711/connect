@@ -5,42 +5,35 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:connect_app/app/data/database.dart';
 import 'package:connect_app/app/integrations/firestore.dart';
 
-const String uid = "id";
-const String unama = "nama";
-const String uemail = "email";
-const String upassword = "password";
-const String uavatar = "avatar";
-const String urole = "role";
-
 class UserModel {
   String? id;
   String? nama;
   String? email;
-  String? password;
   String? avatar;
   String? role;
+  DateTime? tanggal;
 
   UserModel(
-      {this.id, this.nama, this.email, this.password, this.avatar, this.role});
+      {this.id, this.nama, this.email, this.avatar, this.role, this.tanggal});
 
   UserModel fromJson(DocumentSnapshot doc) {
     var json = doc.data() as Map<String, dynamic>?;
     return UserModel(
         id: doc.id,
-        nama: json?[unama],
-        email: json?[uemail],
-        password: json?[password],
-        avatar: json?[avatar],
-        role: json?[role]);
+        nama: json?['nama'],
+        email: json?['email'],
+        avatar: json?['avatar'],
+        role: json?['role'],
+        tanggal: (json?['tanggal'] as Timestamp?)?.toDate());
   }
 
   Map<String, dynamic> get toJson => {
-        uid: id,
-        unama: nama,
-        uemail: email,
-        upassword: password,
-        uavatar: avatar,
-        urole: role,
+        'id': id,
+        'nama': nama,
+        'email': email,
+        'avatar': avatar,
+        'role': role,
+        'tanggal': tanggal
       };
 
   Database db = Database(

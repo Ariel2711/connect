@@ -4,6 +4,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:connect_app/app/data/models/berita_model.dart';
 import 'package:connect_app/app/modules/home/controllers/home_controller.dart';
+import 'package:connect_app/app/routes/app_pages.dart';
 import 'package:connect_app/app/utils/colors.dart';
 import 'package:connect_app/app/utils/constants.dart';
 import 'package:connect_app/app/utils/widgets.dart';
@@ -29,7 +30,7 @@ class BeritaSlider extends GetView<HomeController> {
                   margin: EdgeInsets.symmetric(vertical: 4),
                   child: InkWell(
                     onTap: () {
-                      // Get.toNamed(RouteName.detail_buletin, arguments: buletin);
+                      Get.toNamed(Routes.DETAIL, arguments: berita);
                     },
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
