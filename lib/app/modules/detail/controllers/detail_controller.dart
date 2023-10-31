@@ -23,7 +23,7 @@ class DetailController extends GetxController {
 
   modelToController(BeritaModel berita) {
     beritaId = berita.id;
-    rxkomentar.bindStream(Komentar(beritaId: beritaId).streamAllList());
+    rxkomentar.bindStream(Komentar(beritaId: beritaId).streamListFromBerita());
     if (berita.id != null && berita.judul != null && berita.isi != null) {
       Document documentisi = Document.fromJson(jsonDecode(berita.isi ?? ''));
       quillControllerisi = QuillController(

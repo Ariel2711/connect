@@ -48,16 +48,17 @@ class Komentar {
 
   Stream<List<Komentar>> streamAllList() async* {
     yield* firebaseFirestore
-        .collection(beritaCollection)
-        .doc(beritaId)
-        .collection(komentarCollection)
+        .collectionGroup(komentarCollection)
+        // .where("date_created", isGreaterThanOrEqualTo: DateTime(2020))
+        // .where("id", isNull: true)
+        // .orderBy("date_created", descending: true)
         .snapshots()
         .map((query) {
       List<Komentar> list = [];
-      print("List");
+      // print("List");
       for (var doc in query.docs) {
-        print(doc.reference);
-        print(doc.data());
+        // print(doc.reference);
+        // print(doc.data());
         list.add(
           Komentar.fromJson(
             doc,
@@ -70,19 +71,24 @@ class Komentar {
   }
 
   Stream<List<Komentar>> streamListFromBerita() async* {
-    yield* db.collectionReference
-        .orderBy("tanggal", descending: true)
+    yield* firebaseFirestore
+        .collection(beritaCollection)
+        .doc(beritaId)
+        .collection(komentarCollection)
         .snapshots()
         .map((query) {
       List<Komentar> list = [];
+      // print("List");
       for (var doc in query.docs) {
+        print(doc.reference);
+        print(doc.data());
         list.add(
           Komentar.fromJson(
             doc,
           ),
         );
       }
-      print('list l ${list.length}');
+      print("List length ${list.length}");
       return list;
     });
   }

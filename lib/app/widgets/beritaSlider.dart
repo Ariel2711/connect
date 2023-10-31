@@ -83,28 +83,28 @@ class BeritaSlider extends GetView<HomeController> {
             enableInfiniteScroll: true,
           ),
         ),
-        listberita.length < 2
-            ? SizedBox()
-            : Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: listberita.map((url) {
-                  int index = listberita.indexOf(url);
-                  return Center(
-                    child: Container(
-                      width: 8.0,
-                      height: 8.0,
-                      margin:
-                          EdgeInsets.symmetric(vertical: 10.0, horizontal: 2.0),
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        color: controller.currentPos == index
-                            ? colorPrimary
-                            : textColorGrey,
-                      ),
-                    ),
-                  );
-                }).toList(),
-              ),
+        // listberita.length < 2
+        //     ? SizedBox()
+        //     : Row(
+        //         mainAxisAlignment: MainAxisAlignment.center,
+        //         children: listberita.map((url) {
+        //           int index = listberita.indexOf(url);
+        //           return Center(
+        //             child: Container(
+        //               width: 8.0,
+        //               height: 8.0,
+        //               margin:
+        //                   EdgeInsets.symmetric(vertical: 10.0, horizontal: 2.0),
+        //               decoration: BoxDecoration(
+        //                 shape: BoxShape.circle,
+        //                 color: controller.currentPos == index
+        //                     ? colorPrimary
+        //                     : textColorGrey,
+        //               ),
+        //             ),
+        //           );
+        //         }).toList(),
+        //       ),
       ],
     );
   }
